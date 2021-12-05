@@ -1,10 +1,14 @@
 import React from 'react';
-
 import VideoItem from './VideoItem'
-function VideoList() {
+
+
+const VideoList = ({data, isLoading, changeCurrentVideo}) => {
+    console.log(data)
     return (
         <div>
-            <VideoItem />
+            {isLoading ? 'videos are loading' 
+            : data.map((data) => <VideoItem key={data.id.videoId} video={data} changeCurrentVideo={changeCurrentVideo}/>)
+            }
         </div>
     )
 }

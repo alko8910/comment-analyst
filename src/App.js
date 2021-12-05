@@ -8,10 +8,14 @@ import axios from 'axios';
 
 
 function App() {
-  const KEY = 'AIzaSyD1PiC2FQHZagnPYJ1fyaaeoSFGoqlREsI';
-  const [search, setSearch] = useState('');
+  const KEY = 'AIzaSyD6_7296drRHYaOTOolo_HRTEWogSYOZNw';
+  const [search, setSearch] = useState('ReactJS');
   const [data, setData] = useState([])
-
+  const [currentVideo, setCurrentVideo] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    searchData('ReactJS')
+  },[])
   const searchData = (text) => {
     setSearch(text);
     
@@ -22,20 +26,45 @@ function App() {
           maxResults: 5,
           key: KEY
       }
-  }).then( videos => {
-    setData(videos.data.items);
+  }).then( (videos) => {
+    const videosFiltered = filterVideos(videos.data.items);
+    setData(videosFiltered);
+    setCurrentVideo(videosFiltered[0])
+    setIsLoading(false)
   })
 
   .catch(err => console.log(err))
   }
 
+
+  const filterVideos = (videoList) => {
+    const filteredVideo = [];
+
+    videoList.map(video => {
+      if(video.id.kind === 'youtube#video') {
+        filteredVideo.push(video)
+      }
+    })
+    return filteredVideo;
+  }
+
+  const changeCurrentVideo = (video) => {
+    setCurrentVideo(video);
+  }
+  
   return (
     
     <div className="App">
       
      <SearchBar search={searchData} />
-     <VideoList />
-     <VideoDetail />
+     <VideoList
+      data={data}
+      changeCurrentVideo={changeCurrentVideo}
+      />
+     <VideoDetail 
+      currentVideo={currentVideo}
+      isLoading={isLoading}
+      />
 
     </div>
   );

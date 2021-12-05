@@ -8,6 +8,7 @@ const SearchBar = (props) => {
     const handleSubmit = (e) => {
        e.preventDefault();
         props.search(text)
+    
     }
 
 
@@ -16,7 +17,7 @@ const SearchBar = (props) => {
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <input placeholder = 'React'  
+                <input placeholder = 'Search video'  
                 type='text'
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
