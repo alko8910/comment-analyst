@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 function App() {
-  const KEY = 'AIzaSyD6_7296drRHYaOTOolo_HRTEWogSYOZNw';
+  const KEY = process.env.REACT_APP_API_KEY;
   const [search, setSearch] = useState('ReactJS');
   const [data, setData] = useState([])
   const [currentVideo, setCurrentVideo] = useState({})
@@ -18,13 +18,14 @@ function App() {
   },[])
   const searchData = (text) => {
     setSearch(text);
-    
-  axios.get('https://www.googleapis.com/youtube/v3/search', {
+  }
+  useEffect(() => {
+    axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
           q: search,
           part: 'snippet',
           maxResults: 5,
-          key: KEY
+          key: KEY,
       }
   }).then( (videos) => {
     const videosFiltered = filterVideos(videos.data.items);
@@ -34,7 +35,7 @@ function App() {
   })
 
   .catch(err => console.log(err))
-  }
+  }, [search])
 
 
   const filterVideos = (videoList) => {
@@ -57,15 +58,24 @@ function App() {
     <div className="App">
       
      <SearchBar search={searchData} />
-     <VideoList
-      data={data}
-      changeCurrentVideo={changeCurrentVideo}
-      />
-     <VideoDetail 
-      currentVideo={currentVideo}
-      isLoading={isLoading}
-      />
-
+      <div>
+      <div style={{float:'left'}}>
+        <VideoDetail 
+        currentVideo={currentVideo}
+        isLoading={isLoading}
+        
+        />
+      </div>
+        <div style={{float:'right'}}>
+          
+        <VideoList
+        data={data}
+        changeCurrentVideo={changeCurrentVideo}
+        
+        />
+        </div>
+        
+      </div>
     </div>
   );
 }

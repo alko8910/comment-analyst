@@ -9,11 +9,13 @@ const VIdeoDetail = ({currentVideo, isLoading}) => {
            ) : (
                <>
             <iframe
+             width='500px'
+             height = '300px'
                  src = {`https://www.youtube.com/embed/${currentVideo.id.videoId}`}
                     title={currentVideo.id.videoId}
                     
                 />
-                <h3>{currentVideo.snippet.title}</h3>
+                <h5>{currentVideo.snippet.title}</h5>
                 </>
              )}
         </div>

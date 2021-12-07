@@ -1,5 +1,6 @@
 import React,{ useState } from 'react'
-//import Button from '@mui/material/Button';
+import { Grid } from '@mui/material'
+import Button from '@mui/material/Button';
 //import  TextField  from '@mui/material/TextField';
 //import youtube from '../api/youtube';
 
@@ -11,22 +12,33 @@ const SearchBar = (props) => {
     
     }
 
-
-
-    ////onClick={() => handleSubmit(searchValue)}
     return (
         <div>
+            
+            
             <form onSubmit={(e) => handleSubmit(e)}>
+            <Grid container 
+                direction="row"
+                justifyContent="center"
+                alignItems="center">
+            <Grid item xs={8} md={8} >
                 <input placeholder = 'Search video'  
                 type='text'
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
+                style={{width: '80%'}}
                 />
-                <input 
+                </Grid>
+                <Grid item xs={4} md={4}>
+                <Button
                 type="submit"
-                value='Search'
-                />
+                
+                variant = "contained"
+                >Search</Button>
+                </Grid>
+                </Grid>
             </form>
+            
         </div>
     )
 
