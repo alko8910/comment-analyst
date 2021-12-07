@@ -1,21 +1,17 @@
 import React,{ useState } from 'react'
 import { Grid } from '@mui/material'
 import Button from '@mui/material/Button';
-//import  TextField  from '@mui/material/TextField';
-//import youtube from '../api/youtube';
+
 
 const SearchBar = (props) => {
     const [text, setText] = useState('')
     const handleSubmit = (e) => {
        e.preventDefault();
         props.search(text)
-    
     }
 
     return (
         <div>
-            
-            
             <form onSubmit={(e) => handleSubmit(e)}>
             <Grid container 
                 direction="row"
@@ -38,9 +34,7 @@ const SearchBar = (props) => {
                 </Grid>
                 </Grid>
             </form>
-            
         </div>
     )
-
-    }
+}
 export default SearchBar
