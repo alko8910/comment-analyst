@@ -11,7 +11,7 @@ const SearchBar = (props) => {
     }
 
     return (
-        <div>
+        <div className='input-div'>
             <form onSubmit={(e) => handleSubmit(e)}>
             <Grid container 
                 direction="row"

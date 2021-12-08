@@ -3,7 +3,6 @@ import VideoItem from './VideoItem'
 
 
 const VideoList = ({data, isLoading, changeCurrentVideo}) => {
-    console.log(data)
     return (
         <div>
             {isLoading ? 'videos are loading' 

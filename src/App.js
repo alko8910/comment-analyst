@@ -19,7 +19,7 @@ function App() {
     setSearch(text);
   }
   useEffect(() => {
-    axios.get('https://www.googleapis.com/youtube/v3/search', {
+      axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
           q: search,
           part: 'snippet',
@@ -34,13 +34,13 @@ function App() {
    })
 
     .catch(err => console.log(err))
-  }, [search])
-
+  }, [KEY, search]);
+  
 
   const filterVideos = (videoList) => {
     const filteredVideo = [];
 
-    videoList.map(video => {
+    videoList.forEach(video => {
       if(video.id.kind === 'youtube#video') {
         filteredVideo.push(video)
       }
@@ -56,14 +56,14 @@ function App() {
     
     <div className="App">
       <SearchBar search={searchData} />
-      <div>
-        <div style={{float:'left'}}>
+      <div className='main-div'>
+        <div className='left-div' style={{float:'left'}}>
           <VideoDetail 
           currentVideo={currentVideo}
           isLoading={isLoading}
           />
         </div>
-        <div style={{float:'right'}}>  
+        <div className='right-div' style={{float:'right'}}>  
           <VideoList
           data={data}
           changeCurrentVideo={changeCurrentVideo}
