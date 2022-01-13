@@ -1,7 +1,8 @@
 
 import React from 'react'
-
-const VIdeoDetail = ({currentVideo, isLoading}) => {
+import CommentsList from './CommentsList'
+const VIdeoDetail = ({currentVideo, isLoading, comments,show, setShow, mostFrequentWords}) => {
+    const words = `Most frequent words are ${mostFrequentWords}`
     return (
         <div className='iframe-div'>
                 { isLoading ?  (
@@ -18,9 +19,17 @@ const VIdeoDetail = ({currentVideo, isLoading}) => {
                 <h5>{currentVideo.snippet.title}</h5>
                 <div className='h6-div'>
                 <h6>{currentVideo.snippet.description}</h6>
+                <button onClick={() => setShow(!show)}>Analyze comments</button>
+                        <div>
+                         {show && words}
+                        </div>
                 </div>
             </>
+            
              )}
+              <CommentsList
+                  comments={comments}
+             />
         </div>
     )
 }
