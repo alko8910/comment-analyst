@@ -8,6 +8,7 @@ const SearchBar = (props) => {
     const handleSubmit = (e) => {
        e.preventDefault();
         props.search(text)
+        props.setShow(false)
     }
 
     return (

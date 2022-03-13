@@ -4,8 +4,9 @@ const CommentsList = ({comments}) => {
    
     return (
         <div>
-            {comments.map((item) => (
+            {comments?.map((item) => (
                 <Comment 
+                className='commentsDiv' 
                 key={item.id}
                 text = {item.snippet.topLevelComment.snippet.textDisplay}
                 likes = {item.snippet.topLevelComment.snippet.likeCount}
@@ -13,7 +14,7 @@ const CommentsList = ({comments}) => {
                 image = {item.snippet.topLevelComment.snippet.authorProfileImageUrl}
                 time = {item.snippet.topLevelComment.snippet.publishedAt}
                 />
-            ))}
+            ))} 
         </div>
     )
 }

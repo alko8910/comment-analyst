@@ -17,6 +17,7 @@ function App() {
   const [comments, setComments] = useState([])
   const [word, setWord] = useState([])
   const [show, setShow] = useState(false)
+  const [mostFrequentWords, setMostFrequentWords] = useState([]);
   let words = '';
  
   let br = 15;
@@ -62,11 +63,13 @@ function App() {
         'Accept': 'application/json'
       }
     }).then(response => {
-      
       setComments(response.data.items)
+   
       })
-      .catch(reason => {console.log(reason); return false})
-  },[currentVideo] )
+       .catch(reason => {console.log(reason); 
+        return setComments([])}) 
+        
+  },[currentVideo])
 
   useEffect(() => {
    
@@ -75,15 +78,10 @@ function App() {
     .toLowerCase()
     .replace(/[&/\\#,+()$~%.'":*?<>{}!0-9 ] /g);
     
-    mostFrequentWords = mostFrequentWord(words, br).toString();
+    setMostFrequentWords(mostFrequentWord(words, br));
 
   }, [word])
 
- /*let longWords = word.toString()
-    console.log(longWords)
-    longWords = word.filter(function(str) { return str.length > 3; });
-    
-    setWord(longWords)*/
 
   useEffect(() => {
     setWord(
@@ -98,6 +96,7 @@ function App() {
     let arr = words.split(' ');
     arr = arr.filter(function(str) { return str.length > 3; });
     const map = {};
+    
     for(let i = 0; i < words.length; i++){
       if(arr[i] in map){
         map[arr[i]]++
@@ -105,10 +104,16 @@ function App() {
         map[arr[i]] = 1
       }
     }
+    //console.log('map', map)
     const arrFreq = Object.keys(map).map((key) => [key, map[key]]);
+    //console.log('arr', arrFreq)
     arrFreq.sort((a, b) => b[1] - a[1]);
-   return  arrFreq.slice(0, br).map((el) => el[0]);
+    arrFreq.shift()
+  //console.table(arrFreq.slice(0, br).map((el) => `${el[0] + ' ' + el[1]}`))
+   return  arrFreq.slice(0, br).map((el) => `${el[0]}  ${el[1]}`  )
+   
   }
+  
   const filterVideos = (videoList) => {
     const filteredVideo = [];
 
@@ -121,17 +126,18 @@ function App() {
     return filteredVideo;
   }
  
-console.log(currentVideoId)
+
   const changeCurrentVideo = (video) => {
     setCurrentVideo(video);
     setCurrentVideoId(video.id.videoId)
+    setShow(false)
   }
   
   return (
     
     <div className="App">
      
-      <SearchBar search={searchData} />
+      <SearchBar search={searchData} setShow={setShow} />
       <div className='main-div'>
         <div className='left-div' style={{float:'left'}}>
           <VideoDetail 
@@ -144,7 +150,7 @@ console.log(currentVideoId)
           />
            
         </div>
-        <div className='right-div' style={{float:'right'}}>  
+        <div className='right-div' >  
           <VideoList
           data={data}
           changeCurrentVideo={changeCurrentVideo}

@@ -1,13 +1,21 @@
 .h6-div {
   width: 500px;
 }
+.input-div {
+  margin-bottom: 10px;
+}
+.commentsDiv {
+  width: 100%;
+}
 @media only screen and (max-width:1145px){
   body{
     display: block;
     width:50%;
     margin: 0 auto !important;
   }
-
+  .commentsDiv {
+    width: 50%;
+  }
 }
 
 @media only screen and (max-width: 769px) {
@@ -23,6 +31,7 @@
   }
   .input-div{
     display: block;
+   
   
   }
  iframe{
@@ -35,4 +44,13 @@
  .h6-div {
    width: 300px;
  }
+ .commentsDiv {
+  width: 80%;
 }
+}
+
+ @media only screen and (max-width:250px){
+.commentsDiv {
+  width: 230px;
+}
+} 
