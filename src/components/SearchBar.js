@@ -12,28 +12,28 @@ const SearchBar = (props) => {
     }
 
     return (
-        <div className='input-div'>
+        <div style={{margin: '10px'}}>
             <form onSubmit={(e) => handleSubmit(e)}>
             <Grid container 
                 direction="row"
                 justifyContent="center"
                 alignItems="center">
-            <Grid item xs={8} md={8} >
+            <Grid item xs={12} md={6} >
                 <input placeholder = 'Search video'  
                 type='text'
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
-                style={{width: '80%'}}
+                style={{width: '50%'}}
                 />
                 </Grid>
-                <Grid item xs={4} md={4}>
+                <Grid item xs={12} md={6}>
                 <Button
                 type="submit"
                 
                 variant = "contained"
                 >Search</Button>
                 </Grid>
-                </Grid>
+            </Grid>
             </form>
         </div>
     )

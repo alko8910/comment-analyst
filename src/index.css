@@ -1,3 +1,8 @@
+/* .right-div {
+  float: right;
+  margin-right: 25%;
+}
+
 .h6-div {
   width: 500px;
 }
@@ -45,12 +50,25 @@
    width: 300px;
  }
  .commentsDiv {
-  width: 80%;
+  width: 400px;
 }
+
 }
 
  @media only screen and (max-width:250px){
 .commentsDiv {
   width: 230px;
 }
-} 
+.right-div {
+  margin-left: 25%;
+ }
+}  */
+
+@media only screen and (max-width:250px){
+  .commentsDiv {
+    width: 230px;
+  }
+  .right-div {
+    margin-left: 25%;
+   }
+  } 

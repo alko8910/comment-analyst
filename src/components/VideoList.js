@@ -8,6 +8,7 @@ const VideoList = ({ data, isLoading, changeCurrentVideo}) => {
         ? "videos are loading"
         : data.map((data) => (
             <VideoItem
+            
               key={data.id.videoId}
               video={data}
               changeCurrentVideo={changeCurrentVideo}
